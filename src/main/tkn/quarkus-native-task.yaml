@@ -17,13 +17,19 @@ spec:
 
       cd target/native-sources
 
-      native-image $(cat native-image.args) -J-Xmx4g
+      native-image $(cat native-image.args) -J-Xmx6g
 
       # The Dockerfile.native expects the native executable to be under target directory
       cp *-runner ..
 
     workingDir: $(workspaces.source.path)
+    resources:
+      requests:
+        memory: 6Gi
+      limits:
+        memory: 6Gi
   workspaces:
     - name: source
       description: The workspace consiting fo the Quarkus maven project
+  
     
